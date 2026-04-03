@@ -7,60 +7,74 @@
  * report BEFORE writing any code below. Marks are awarded for all
  * three components: pseudocode, flowchart, and working code.
  *
- * @author     [Your Full Name]
- * @student    [Your Reg Number, e.g. SCT212-XXXX/2024]
+ * @author     [wayne naum]
+ * @student    [ENE212-0060/2023]
  * @lab        Lab 3 of 14
  * @unit       ICS 2371
  * @date       [Date completed]
  */
 
-// ── Test Data Set A (change values to run other test sets) ─────────────────
-$name  = "Your Name";
-$cat1  = 8;  // out of 10
-$cat2  = 7;  // out of 10
-$cat3  = 9;  // out of 10
-$cat4  = 6;  // out of 10
-$exam  = 52; // out of 60
+echo "<h3>Task 2: Grade Classification System</h3>";
 
-// ── Grade Rules (implement using if-elseif-else, ordered highest first) ────
-// A  (Distinction):    Total >= 70
-// B+ (Credit Upper):   Total >= 65
-// B  (Credit Lower):   Total >= 60
-// C+ (Pass Upper):     Total >= 55
-// C  (Pass Lower):     Total >= 50
-// D  (Marginal Pass):  Total >= 40
-// E  (Fail):           Total <  40
+// ==========================================
+// 1. INPUTS (Currently set to Test Set A)
+// ==========================================
+$cat1 = 0;
+$cat2 = 0;
+$cat3 = 0;
+$cat4 = 0;
+$exam = 15;
 
-// ── Eligibility Rule (implement using nested if) ───────────────────────────
-// Must have attended at least 3 of 4 CATs (CAT score > 0 counts as attended)
-// AND exam score >= 20
-// Otherwise: "DISQUALIFIED — Exam conditions not met"
+// ==========================================
+// 2. SEQUENCE: Calculations
+// ==========================================
+$total = $cat1 + $cat2 + $cat3 + $cat4 + $exam;
+$cats_attended = 0;
 
-// ── Supplementary Rule (implement using ternary) ──────────────────────────
-// If grade is D: "Eligible for Supplementary Exam"
-// Otherwise:     "Not eligible for supplementary"
+if ($cat1 > 0) { $cats_attended++; }
+if ($cat2 > 0) { $cats_attended++; }
+if ($cat3 > 0) { $cats_attended++; }
+if ($cat4 > 0) { $cats_attended++; }
 
-// ── STEP 1: Compute total ─────────────────────────────────────────────────
-// TODO: compute $total
+echo "<strong>Scores:</strong> CATs Attended: $cats_attended/4 | Exam: $exam | Total Score: $total/100<br><br>";
 
+// ==========================================
+// 3. SELECTION: Eligibility & Grading
+// ==========================================
+if ($cats_attended >= 3 && $exam >= 20) {
+    
+    // --- Grade Classification (if-elseif-else) ---
+    if ($total >= 70) {
+        $grade = "A";
+        $desc = "Distinction";
+    } elseif ($total >= 65) {
+        $grade = "B+";
+        $desc = "Credit Upper";
+    } elseif ($total >= 60) {
+        $grade = "B";
+        $desc = "Credit Lower";
+    } elseif ($total >= 55) {
+        $grade = "C+";
+        $desc = "Pass Upper";
+    } elseif ($total >= 50) {
+        $grade = "C";
+        $desc = "Pass Lower";
+    } elseif ($total >= 40) {
+        $grade = "D";
+        $desc = "Marginal Pass";
+    } else {
+        $grade = "E";
+        $desc = "Fail";
+    }
 
-// ── STEP 2: Count CATs attended ───────────────────────────────────────────
-// TODO: compute $cats_attended (each CAT > 0 counts as attended)
+    echo "<strong>Status:</strong> Grade $grade ($desc)<br>";
 
+    // --- Supplementary Check (Ternary Operator) ---
+    $supp_status = ($grade === "D") ? "Eligible for Supplementary Exam" : "Not eligible for supplementary";
+    echo "<strong>Supplementary:</strong> $supp_status<br>";
 
-// ── STEP 3: Eligibility check (nested if) ─────────────────────────────────
-// TODO: nested if — eligibility → grade classification → supplementary ternary
-
-
-// ── STEP 4: Display formatted HTML report card ────────────────────────────
-// TODO: output a clear, formatted report card showing:
-//       student name, each CAT score, exam score, total,
-//       cats attended, eligibility status, grade, remark, supplementary status
-
-
-// ── Required Test Data Sets — screenshot each ─────────────────────────────
-// Set A: cat1=8, cat2=7, cat3=9, cat4=6,  exam=52  → expect grade B
-// Set B: cat1=9, cat2=8, cat3=0, cat4=9,  exam=55  → expect grade A (check cats_attended)
-// Set C: cat1=0, cat2=0, cat3=7, cat4=0,  exam=48  → expect DISQUALIFIED
-// Set D: cat1=5, cat2=4, cat3=6, cat4=3,  exam=22  → expect grade D + supp eligible
-// Set E: cat1=0, cat2=0, cat3=0, cat4=0,  exam=15  → expect DISQUALIFIED
+} else {
+    // --- Disqualified Branch ---
+    echo "<strong>Status:</strong> <span style='color:red;'>DISQUALIFIED — Exam conditions not met</span><br>";
+}
+?>
