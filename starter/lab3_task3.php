@@ -3,59 +3,79 @@
  * ICS 2371 — Lab 3: Control Structures I
  * Task 3: switch-case and match Expression [6 marks]
  *
- * @author     [Your Full Name]
- * @student    [Your Reg Number, e.g. SCT212-XXXX/2024]
+ * @author     [wayne naum ]
+ * @student    [ENE 212-0060/2023]
  * @lab        Lab 3 of 14
  * @unit       ICS 2371
  * @date       [Date completed]
  */
 
-// ══════════════════════════════════════════════════════════════
+// ==========================================
 // EXERCISE A — Day of Week Classifier
-// ══════════════════════════════════════════════════════════════
-// Given $day (integer 1–7, where 1=Monday):
-// Use switch-case to print the day name.
-// Group Saturday and Sunday under "Weekend".
-// All weekdays print their name and "— Lecture day".
-// Remember: break is NOT optional. Missing break = fall-through.
+// ==========================================
+echo "<h3>Exercise A — Day of Week Classifier</h3>";
 
-$day = 3; // change this to test all cases
+$day = 4; 
 
-// TODO: switch-case for day classifier
+switch ($day) {
+    case 1: echo "Monday — Lecture day<br>"; break;
+    case 2: echo "Tuesday — Lecture day<br>"; break;
+    case 3: echo "Wednesday — Lecture day<br>"; break;
+    case 4: echo "Thursday — Lecture day<br>"; break;
+    case 5: echo "Friday — Lecture day<br>"; break;
+    case 6:
+    case 7:
+        echo "Weekend<br>";
+        break;
+    default:
+        echo "Invalid day number. Please enter 1-7.<br>";
+        break;
+}
 
+echo "<hr>";
 
-// ══════════════════════════════════════════════════════════════
+// ==========================================
 // EXERCISE B — HTTP Status Code Explainer
-// ══════════════════════════════════════════════════════════════
-// Given $status_code, use switch-case to explain it:
-//   200 → "OK — request succeeded"
-//   301 → "Moved Permanently — resource relocated"
-//   400 → "Bad Request — client error"
-//   401 → "Unauthorized — authentication required"
-//   403 → "Forbidden — access denied"
-//   404 → "Not Found — resource missing"
-//   500 → "Internal Server Error — server fault"
-// default → "Unknown status code"
+// ==========================================
+echo "<h3>Exercise B</h3>";
 
-$status_code = 404;
+$status_code = 404; 
 
-// TODO: switch-case for HTTP status
+switch ($status_code) {
+    case 200: echo "200: OK — The request succeeded.<br>"; break;
+    case 301: echo "301: Moved Permanently — The URL has been changed.<br>"; break;
+    case 400: echo "400: Bad Request — The server could not understand the request.<br>"; break;
+    case 401: echo "401: Unauthorized — Authentication is required.<br>"; break;
+    case 403: echo "403: Forbidden — You do not have permission to access this.<br>"; break;
+    case 404: echo "404: Not Found — The requested resource could not be found.<br>"; break;
+    case 500: echo "500: Internal Server Error — The server encountered a problem.<br>"; break;
+    default: echo "$status_code: Unknown Status Code.<br>"; break;
+}
 
+echo "<hr>";
 
-// ══════════════════════════════════════════════════════════════
-// EXERCISE C — PHP 8 match Expression
-// ══════════════════════════════════════════════════════════════
-// Rewrite Exercise B using PHP 8 match instead of switch-case.
-// Note: match uses STRICT comparison (===). No break needed.
-// Observe the difference in syntax and behaviour.
+// ==========================================
+// EXERCISE C — PHP 8 match Rewrite
+// ==========================================
+echo "<h3>Exercise C</h3>";
 
-// TODO: match expression for HTTP status — same logic as Exercise B
+$status_code_match = 404; 
 
+// The match expression assigns the result directly to the variable
+$explanation = match ($status_code_match) {
+    200 => "200: OK — The request succeeded.<br>",
+    301 => "301: Moved Permanently — The URL has been changed.<br>",
+    400 => "400: Bad Request — The server could not understand the request.<br>",
+    401 => "401: Unauthorized — Authentication is required.<br>",
+    403 => "403: Forbidden — You do not have permission to access this.<br>",
+    404 => "404: Not Found — The requested resource could not be found.<br>",
+    500 => "500: Internal Server Error — The server encountered a problem.<br>",
+    default => "$status_code_match: Unknown Status Code.<br>",
+};
 
-// ══════════════════════════════════════════════════════════════
-// EXERCISE D — Rewrite comparison
-// ══════════════════════════════════════════════════════════════
-// In your PDF report, answer:
-// 1. What is the key difference between switch (==) and match (===)?
-// 2. Give one example where this difference changes the output.
-// 3. When would you prefer switch over match, and why?
+echo $explanation;
+
+echo "<hr>";
+
+// The single closing tag for the whole file!
+?>
